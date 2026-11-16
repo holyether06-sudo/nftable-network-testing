@@ -1,0 +1,36 @@
+
+name: Network Defense nftables Lab
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run-isolated-lab:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Install test prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends iproute2 nftables python3 util-linux
+          nft --version
+          ip -V
+
+      - name: Run kernel firewall laboratory in isolated network namespaces
+        run: |
+          sudo CYCLES=3 REPEATS=5 bash NetworkDefense_NFTables_Lab/run_lab.sh --vm-root
+
+      - name: Upload evidence (including on failure)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: network-defense-nftables-evidence
+          path: NetworkDefense_NFTables_Lab/results/
+          if-no-files-found: warn
+          retention-days: 14
