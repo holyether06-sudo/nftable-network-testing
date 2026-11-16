@@ -1,0 +1,25 @@
+Isolating all virtual networks in a new user, mount and network namespace...
+
+=== Cycle 1 / flat ===
+flat          c1 attacker->user     #1: ALLOW
+flat          c1 attacker->user     #2: ALLOW
+flat          c1 attacker->web      #1: ALLOW
+flat          c1 attacker->web      #2: ALLOW
+flat          c1 attacker->database #1: ALLOW
+flat          c1 attacker->database #2: ALLOW
+flat          c1 attacker->admin    #1: ALLOW
+flat          c1 attacker->admin    #2: ALLOW
+flat          c1 web     ->database #1: ALLOW
+flat          c1 web     ->database #2: ALLOW
+mode=flat cycle=1 marker=CONTROLLED_MARKER_flat_c1 result=WEB_FORWARDED:MARKER_RECEIVED:CONTROLLED_MARKER_flat_c1
+MODE | SOURCE -> TARGET | SUCCESS/TOTAL
+flat           | attacker->admin    | 2/2
+flat           | attacker->database | 2/2
+flat           | attacker->user     | 2/2
+flat           | attacker->web      | 2/2
+flat           | web     ->database | 2/2
+
+Summary saved to: /mnt/data/NetworkDefense_NFTables_Lab/results/summary.json
+Wrote actual-evidence chart: /mnt/data/NetworkDefense_NFTables_Lab/results/figure_actual_connections.svg
+
+Done. Results: /mnt/data/NetworkDefense_NFTables_Lab/results

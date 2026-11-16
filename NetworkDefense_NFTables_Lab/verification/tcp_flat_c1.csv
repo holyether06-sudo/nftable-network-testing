@@ -1,0 +1,9 @@
+mode,cycle,source,target,target_ip,port,trial,success,response,error,duration_ms
+flat,1,attacker,user,10.99.0.20,8080,1,1,OK:user,,1.213
+flat,1,attacker,user,10.99.0.20,8080,2,1,OK:user,,0.593
+flat,1,attacker,web,10.99.0.30,8080,1,1,OK:web,,0.628
+flat,1,attacker,web,10.99.0.30,8080,2,1,OK:web,,0.386
+flat,1,attacker,database,10.99.0.40,8080,1,1,OK:database,,0.653
+flat,1,attacker,database,10.99.0.40,8080,2,1,OK:database,,0.426
+flat,1,attacker,admin,10.99.0.50,8080,1,1,OK:admin,,0.62
+flat,1,attacker,admin,10.99.0.50,8080,2,1,OK:admin,,0.303
